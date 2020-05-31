@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件处理</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p>{{count}}</p>
+        <input type="text" @input="handleInput($event)">
+        <button @click="handleClick1()">click1-通过函数调用</button>
+        <button @click="handleClick2">click2-通过函数名</button>
+        <button @click="count++">click2-通过表达式</button>
+
+        <ul @click.self="handleUlClick">
+            <li @click.stop="handleLiClick1">1111</li>
+            <li>2222</li>
+            <li @click.once="handleLiClick3">3333</li>
+        </ul>
+
+        <a href="http://www.baidu.com" @click.prevent="handleAClick">跳转页面</a>
+
+        <button @click="isActive && handleBind()">事件解绑</button>
+
+        <p>todolist-<input type="text" @keydown.enter="handleKeyDown"></p>
+    </div>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                count: 1,
+                isActive:true
+            },
+            methods: {
+                handleClick1() {
+                    this.count++;
+                },
+                handleClick2() {
+                    this.count++;
+                },
+                handleInput(e){
+                    // e.target会得到事件源
+                    // 不加小括号会拿到事件对象
+                    // 既想获取参数，又想拿到事件对象，可以传参$event
+                    console.log(e.target.value);
+                },
+                handleLiClick1(){
+                    // event.stopPropagation
+                    // 事件修饰符.stop阻止事件冒泡
+                    console.log("li")
+                },
+                handleLiClick3(){
+                    // 事件修饰符.once只执行一次
+                    console.log(3);
+                },
+
+                handleUlClick(){
+                    // .self必须当前点击的事件源为它自己时执行
+                    console.log("ul")
+                },
+                handleAClick(){
+                    // event.preventDefault
+                    // .prevent阻止事件默认行为
+                    console.log("a");
+                },
+                handleBind(){
+                    console.log(1);
+                    this.isActive = false;
+                },
+                handleKeyDown(ev){
+                    // 可以用键值或者是特殊的用单词   比如enter up down left right space 
+                    console.log(ev.keyCode,ev.target.value);
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

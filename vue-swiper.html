@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>swiper--动态</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
+    <script src="https://unpkg.com/swiper/js/swiper.min.js"> </script>
+    <style>
+        .swiper-container {
+            width: 600px;
+            height: 300px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+        <swiper :key="dataList.length">
+            <div class="swiper-slide" v-for="data in dataList" :key="data">{{data}}</div>
+        </swiper>
+    </div>
+
+    <script>
+        Vue.component("swiper", {
+            template: `
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <slot></slot>
+                </div>
+                <!-- 如果需要分页器 -->
+                <div class="swiper-pagination"></div>
+            </div>
+            `,
+            mounted() {
+                new Swiper('.swiper-container', {
+                    // direction: 'vertical', // 垂直切换选项
+                    loop: true,// 循环模式选项
+                    // 如果需要分页器
+                    pagination: {
+                        el: '.swiper-pagination',
+                    },
+                })
+            }
+        })
+
+        var app = new Vue({
+            el: "#app",
+            data: {
+                dataList: []
+            },
+            mounted() {
+                setTimeout(() => {
+                    this.dataList = ["111", "222", "333"]
+                }, 2000)
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计算属性--watch</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p>单价<input type="text" v-model="price"></p>
+        <p>数量<input type="text" v-model="num"></p>
+
+        <p>金额计算:{{sum}}</p>
+    </div>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                price: 100,
+                num: 1,
+                sum: 0
+            },
+            computed: {
+                total() {
+                    const { price, num } = this;
+                    return {
+                        price,
+                        num
+                    }
+                }
+            },
+            watch: {
+                total: {
+                    // watch中不应使用箭头函数
+                    handler: function(newVal, oldVal) {
+                        if(newVal !== oldVal){
+                            console.log(this.sum);
+                            this.sum = newVal.price * newVal.num;
+                            console.log(this.sum)
+                        }
+                    },
+                    deep: true,
+                    immediate: true
+                }
+            },
+            methods: {
+                
+            }
+        })
+    </script>
+</body>
+
+</html>

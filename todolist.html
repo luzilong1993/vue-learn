@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>todolist</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="data">
+        <button @click="addList">add</button>
+        <ul>
+            <li v-for="(item,index) in dataList" :key="index">
+                {{item}}    -- <button @click="handleDelete(index)">delete</button>
+            </li>
+        </ul>
+
+    </div>
+    <script>
+
+        var app = new Vue({
+            el: "#app",
+            data: {
+                dataList: ["小六", "six"],
+                data: ""
+            },
+            methods: {
+                addList() {
+                    if (this.data) {
+                        this.dataList.push(this.data);
+                        this.data = "";
+                    }
+                },
+                handleDelete(index){
+                    this.dataList.splice(index,1);
+                }
+
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>swiper--动态</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
+    <script src="https://unpkg.com/swiper/js/swiper.min.js"> </script>
+    <style>
+        .swiper-container {
+            width: 600px;
+            height: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+
+        </div>
+        <!-- 如果需要分页器 -->
+        <div class="swiper-pagination"></div>
+    </div>
+
+    <script>
+
+        setTimeout(() => {
+            var list = ["111", "222", "333"];
+            var newList = list.map(item => `<div class="swiper-slide">${item}</div>`);
+            console.log(newList);
+            document.querySelector(".swiper-wrapper").innerHTML = newList.join("");
+            var mySwiper = new Swiper('.swiper-container', {
+                // direction: 'vertical', // 垂直切换选项
+                loop: true,// 循环模式选项
+                // 如果需要分页器
+                pagination: {
+                    el: '.swiper-pagination',
+                },
+            })
+        }, 2000)
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>refs通信</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" ref="mytext">
+        <button @click="handleClick()">click</button>
+
+        <child ref="com"></child>
+    </div>
+    <script>
+
+        // 子组件
+        Vue.component("child",{
+            template:`
+                <div>孩子组件</div>
+            `,
+            data(){
+                return{
+                    title:"title"
+                }
+            },
+            methods:{
+                getvalue(data){
+                    console.log("从父组件传递",data);
+                }
+            }
+        })
+
+        // vue实例   ，root Component
+        var app = new Vue({
+            el: "#app",
+            data: {
+               
+            },
+            methods: {
+                handleClick(){
+                    console.log(this.$refs.com) 
+                    this.$refs.com.getvalue(this.$refs.mytext.value);
+                }
+            }
+        })
+
+
+        // 1.ref放普通标签上拿到原生节点
+        // 2.ref放组件上拿到组件对象
+    </script>
+</body>
+
+</html>

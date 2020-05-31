@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组件--父传子</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <navbar myname="首页" :word="text" :myshow="false"></navbar>
+        <navbar myname="列表" :word="text" :myshow="true"></navbar>
+        <navbar myname="购物车" :word="text" :myshow="true"></navbar>
+    </div>
+    <script>
+
+        // 全局定义组件(作用域隔离)
+        Vue.component("navbar", {//只能有一个根节点
+            template: `
+            <nav>
+                <button @click="handleBack()">返回</button>
+                <span style="background:yellow">{{title}}--{{myname}}--{{word}}</span>
+                <button v-if="myshow">主页</button>
+            </nav>
+            
+            
+            `,//描述组件结构
+            // 组件中data必须是函数式写法，必须有返回值
+            data() {
+                return {
+                    title: "卖座"
+                }
+            },
+            // props:["myname","word","myshow"],
+            // 属性验证
+            props: {
+                myname: String,
+                word: String,
+                myshow: Boolean
+            },
+            computed: {},
+            watch: {},
+            methods: {
+                handleBack() {
+                    console.log("back点击")
+                }
+            }
+        })
+
+        // vue实例   ，root Component
+        var app = new Vue({
+            el: "#app",
+            data: {
+                // title:"卖座"
+                text: "来自父组件"
+            },
+            methods: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>

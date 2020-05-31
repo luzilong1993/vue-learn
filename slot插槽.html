@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>slot插槽</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <swiper>
+            <ul>
+                <li>1111</li>
+                <li>1111</li>
+                <li>1111</li>
+            </ul>
+        </swiper>
+        <swiper>
+            <ul>
+                <li>2222</li>
+                <li>1111</li>
+                <li>1111</li>
+            </ul>
+        </swiper>
+        <swiper>
+            <ul>
+                <li>3333</li>
+                <li>1111</li>
+                <li>1111</li>
+            </ul>
+        </swiper>
+        <swiper>
+            <ul>
+                <li v-for="data in dataList">{{data}}</li>
+            </ul>
+        </swiper>
+    </div>
+    <script>
+
+        // slot把父组件模板中内容，混入到子组件中间
+        var app = new Vue({
+            el: "#app",
+            data: {
+                dataList:["111","wowowo","hdhdhdhh"]
+            },
+            components: {
+                swiper: {
+                    template: `
+                    
+                        <div>
+                            <slot></slot>
+                        </div>
+                    `
+                }
+            },
+            methods: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>

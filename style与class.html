@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>style与class</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .yellow {
+            background: yellow;
+        }
+
+        .red {
+            background: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <button @click="handleClickObj">change对象</button>
+        <button @click="handleClickArr">change数组</button>
+        <div :class="classObj">动态设置class的需求--对象写法</div>
+        <div :class="classArr">动态设置class的需求--数组写法写法</div>
+
+
+        <button @click="handleClickStyleObj">change对象</button>
+        <button @click="handleClickStyleArr">change数组</button>
+        <div :style="styleObj">动态设置style的需求--对象写法</div>
+        <div :style="styleArr">动态设置style的需求--数组写法</div>
+
+    </div>
+    <script>
+
+        var app = new Vue({
+            el: "#app",
+            data: {
+                classObj: {
+                    a: true,
+                    b: true,
+                    c: false
+                },
+                classArr: [
+                    "aaa",
+                    "bbb"
+                ],
+                styleObj: {
+                    backgroundColor: "red",
+                    fontSize: "20px"
+                },
+                styleArr: [
+                    { backgroundColor: "red" },
+                    { fontSize: "20px" }
+                ]
+            },
+            methods: {
+                handleClickObj() {
+                    // 新加一个属性d
+                    Vue.set(this.classObj, "d", true);
+
+                },
+                handleClickArr() {
+                    // 数组push方法返回值为数组的长度
+                    this.classArr.push("ddd")
+                },
+                handleClickStyleObj() {
+                    // 使用vue.set给data中的对象追加一个属性
+                    Vue.set(this.styleObj, "color", "yellow");
+                },
+                handleClickStyleArr(){
+                    this.styleArr.push({color:"yellow"})
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

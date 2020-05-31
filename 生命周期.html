@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生命周期</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <child></child>
+    </div>
+    <script>
+        Vue.component("child",{
+            template:`
+                <div>
+                    child
+                    <button @click="title='1111'">click</button>
+                </div>
+            `,
+            beforeCreate(){
+                console.log("beforCreate")
+            },
+            created(){
+                console.log("created")
+            },
+            beforeMount(){
+                console.log("beforeMount")
+            },
+            mounted(){
+                console.log("mounted")
+            },
+            beforeUpdate(){
+                console.log("beforeUpdate")
+            },
+            updated(){
+                console.log("updated")
+            },
+            beforeDestory(){
+                console.log("beforeDestory")
+            },
+            destoryed(){
+                console.log("destoryed")
+            },
+            data(){
+                return{
+                    title:0,
+                    dataList:[]
+                }
+            },
+            methods:{
+
+            }
+        })
+
+        var app = new Vue({
+            el: "#app",
+            data: {
+               
+            },
+            methods: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>

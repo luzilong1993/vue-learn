@@ -1,11 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>列表</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+       
+    </style>
 </head>
+
 <body>
-    <div>我是第一个列表</div>
+    <div id="app">
+        <ul>
+            <li v-for="item in dataList">{{item}}</li>
+        </ul>
+
+    </div>
+    <script>
+        // vue中key值作用：跟踪每个节点的身份，从而重用和重新排序现有元素   最理想的key值为每项仅有且唯一的id
+
+        var app = new Vue({
+            el: "#app",
+            data: {
+            
+               dataList:["six","小六"]
+            },
+            methods: {
+                
+            }
+        })
+
+
+        // var arr = ["111","222","333"]
+        // for(var i in arr){
+        //     console.log(i);
+        // }
+        // for(var i of arr){
+        //     console.log(i);
+        // }
+
+        // var obj = {
+        //     name:"six",
+        //     age:18
+        // }
+        // for(var i in obj){
+        //     console.log(i)
+        // }
+        // for(var i of obj){
+        //     // for  of循环不支持遍历对象
+        //     console.log(i)
+        // }
+    </script>
 </body>
+
 </html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mixins</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <button @click="myMethods()">click</button>
+        <button @click="methodA()">click</button>
+    </div>
+    <script>
+        function complexMethod() {
+            console.log("执行了复杂方法")
+            return ["111", "222", "333"]
+        }
+
+
+        var obj = {
+            methods:{
+                methodA(){
+                    console.log("methodA")
+                },
+                methodB(){
+                    console.log("methodB")
+                },
+                methodC(){
+                    console.log("methodC")
+                },
+            }
+        }
+        var app = new Vue({
+            el: "#app",
+            data: {
+
+            },
+            methods: {
+                myMethods:complexMethod,
+                // myMethodsA:obj.methods.methodA,
+                methodA(){
+                    // 优先级高
+                    console.log("methodsA-vue")
+                }
+            },
+            mixins:[obj]
+        })
+    </script>
+</body>
+
+</html>

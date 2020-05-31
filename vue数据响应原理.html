@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue数据响应原理</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{myName}}
+    </div>
+    <div id="box">
+
+    </div>
+    <script>
+        var app = new Vue({
+            el:"#app",
+            data:{
+                myName:"six"
+            }
+        })
+    </script>
+    <script>
+        // vue数据响应原理
+        var obj = {};
+        var oBox = document.getElementById("box");
+        // get set拦截
+        Object.defineProperty(obj,"name",{
+            get(){
+                console.log("get调用")
+            },
+            set(data){
+                console.log("set调用")
+                oBox.innerHTML = data;
+
+            }
+        })
+
+    </script>
+    
+</body>
+</html>

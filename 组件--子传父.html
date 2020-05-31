@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组件--子传父</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <child @myenevt="handlevent"></child>
+    </div>
+    <script>
+
+        // 全局定义组件(作用域隔离)
+        Vue.component("child", {
+            template: `
+              <div>
+                    child
+                    <button @click="handleClick">click</button>
+              </div>
+            `,//描述组件结构
+            // 组件中data必须是函数式写法，必须有返回值
+            data() {
+                return {
+                    title: "卖座"
+                }
+            },
+            computed: {},
+            watch: {},
+            methods: {
+                handleClick(){
+                    // 通知父组件
+                    this.$emit("myenevt",1000)
+                }
+            }
+        })
+
+        // vue实例   ，root Component
+        var app = new Vue({
+            el: "#app",
+            data: {
+                // title:"卖座"
+                text: "来自父组件"
+            },
+            methods: {
+                handlevent(data){
+                    console.log("等待子组件传来的状态",data)
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

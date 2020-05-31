@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-model</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="mytext">
+        <p>{{mytext}}</p>
+
+        记住用户名：<input type="checkbox" v-model="isCheck">
+        <p>{{isCheck}}</p>
+
+        <input type="checkbox" v-model="checkGroup" value="vue">vue
+        <input type="checkbox" v-model="checkGroup" value="react">react
+        <input type="checkbox" v-model="checkGroup" value="jquery">jquery
+
+        <br>
+        <input type="radio" name="favor" value="vue" v-model="picked">vue
+        <input type="radio" name="favor" value="react" v-model="picked">react
+        <input type="radio" name="favor" value="jquery" v-model="picked">jquery
+        <p>{{picked}}</p>
+    </div>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                mytext:"",
+                isCheck:false,
+                checkGroup:[],
+                picked:""
+            },
+            methods: {
+                
+            }
+        })
+    </script>
+</body>
+
+</html>

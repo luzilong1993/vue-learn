@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>购物车</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input type="checkbox" v-model="isAllSelect" @change="handleAllSelect">
+        <ul>
+            <li v-for="data in dataList" :key="data.id">
+                <input type="checkbox" v-model="checkGroup" :value="data" @change="handleDataChange">
+                {{data}}
+                <button @click="handleDelClick(data)">del</button>
+                {{data.number}}
+                <button @click="handleAddClick(data)">add</button>
+            </li>
+        </ul>
+        <p>{{checkGroup}}</p>
+        <p>总金额计算{{getSum()}}</p>
+    </div>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                dataList: [
+                    {
+                        name: "商品1",
+                        price: 10,
+                        number: 1,
+                        id: "1"
+                    },
+                    {
+                        name: "商品2",
+                        price: 20,
+                        number: 2,
+                        id: "2"
+                    },
+                    {
+                        name: "商品3",
+                        price: 30,
+                        number: 3,
+                        id: "3"
+                    }
+                ],
+                checkGroup: [],
+                isAllSelect: false
+            },
+            methods: {
+                getSum() {
+                    // return 11;
+                    // 购物车勾选数据累加
+                    var sum = 0;
+                    for (let i in this.checkGroup) {
+                        sum += this.checkGroup[i].number * this.checkGroup[i].price;
+                    }
+                    return sum;
+                },
+                handleDelClick(data) {
+                    if (data.number > 0) {
+                        data.number--;
+                    } else {
+                        data.number = 0;
+                    }
+                },
+                handleAddClick(data) {
+                    data.number++;
+                },
+                // 全选
+                handleAllSelect() {
+                    if (this.isAllSelect) {
+                        this.checkGroup = this.dataList;
+                        console.log(this.checkGroup);
+                    } else {
+                        this.checkGroup = [];
+                    }
+                },
+                handleDataChange() {
+                    if (this.checkGroup.length === this.dataList.length) {
+                        this.isAllSelect = true;
+                    } else {
+                        this.isAllSelect = false;
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

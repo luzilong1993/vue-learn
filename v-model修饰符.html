@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-model修饰符</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+       <input type="text" v-model.lazy="name">
+
+       <p>{{name}}</p>
+
+       <input type="text" v-model.number="age">
+       <p>{{age}}</p>
+
+       <input type="text" v-model.trim="name2">
+       <p>{{name2}}</p>
+    </div>
+    <script>
+        // .lazy   在失去焦点时获取数据，不会太勤快
+        // .number   将字符串转成数字，在"333"这种，""得好好的好的"这种不转
+        // .trim  删除首尾空格
+        var app = new Vue({
+            el: "#app",
+            data: {
+               name:"",
+               age:0,
+               name2:""
+            },
+            methods: {
+               
+            }
+        })
+    </script>
+</body>
+
+</html>

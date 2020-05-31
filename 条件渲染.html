@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>条件渲染</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+       
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div v-if="isCreated">true</div>
+        <div v-else>false</div>
+
+        <button @click="handleClick">add</button>
+        <ul v-if="dataList.length>0">
+            <li v-for="item in dataList">
+                {{item}}
+            </li>
+        </ul>
+        <div v-else>该用户还没添加</div>
+
+    </div>
+    <script>
+
+        var app = new Vue({
+            el: "#app",
+            data: {
+               isCreated:false,
+               dataList:[]
+            },
+            methods: {
+                handleClick(){
+                    this.dataList = ["six","小六"]
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

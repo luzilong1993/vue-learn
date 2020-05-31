@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组件</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <navbar></navbar>
+        <sidebar></sidebar>
+    </div>
+    <script>
+
+        Vue.component("commonchild",{
+            template:`
+                <div>我是公共孩子</div>
+            `
+        })
+
+        // 全局定义组件(作用域隔离)
+        Vue.component("navbar", {//只能有一个根节点
+            template: `
+            <nav>
+                <button @click="handleBack()">返回</button>
+                <span style="background:yellow">{{title}}--标题</span>
+                <button>主页</button>
+                <commonchild></commonchild>
+                <navbarchild></navbarchild>
+            </nav>
+            
+            
+            `,//描述组件结构
+            // 组件中data必须是函数式写法，必须有返回值
+            data() {
+                return {
+                    title: "卖座"
+                }
+            },
+            // components  定义局部组件
+            components:{
+                navbarchild:{
+                    template:`
+                        <div>navbarchild--只是navbar的孩子</div>
+                    `
+                }
+            },
+            computed: {},
+            watch: {},
+            methods: {
+                handleBack() {
+                    console.log("back点击")
+                }
+            }
+        })
+
+        Vue.component("sidebar", {
+            template: `
+            <ul>
+                <li>111</li>
+                <li>222</li>
+            </ul>
+            `
+        })
+
+        // vue实例   ，root Component
+        var app = new Vue({
+            el: "#app",
+            data: {
+                // title:"卖座"
+            },
+            methods: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>

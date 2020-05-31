@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>axios</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+</head>
+
+<body>
+    <div id="app">
+        <button @click="handleClick">正在热映</button>
+
+        <ul>
+            <li v-for="data in dataList" :key="data.filmId">
+                <img :src="data.src" style="width:100px;height:150px">
+                <h2>{{data.name}}</h2>
+            </li>
+        </ul>
+    </div>
+    <script>
+        // fetch兼容性不好   caniuse查询   一般使用axios
+        var app = new Vue({
+            el: "#app",
+            data: {
+                dataList: []
+            },
+            methods: {
+                handleClick() {
+                    axios.get("get/get.json").then(res => {
+                        console.log(res);
+                        this.dataList = res.data.data.films;
+                    })
+                    // axios({
+                    //     url: "https://m.maizuo.com/gateway?cityId=110100&k=1347806",
+                    //     methods: "get",
+                    //     header: {
+                    //         "X-Client-Info": '{"a":"3000","ch":"1002","v":"5.0.4","e":"159058359423278722744321","bc":"110100"}',
+                    //         "X-Host": 'mall.film-ticket.film.list'
+                    //     }
+                    // }).then(res =>{
+                    //     console.log(res);
+                    // })
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

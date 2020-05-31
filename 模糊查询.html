@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模糊查询</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" @input="handleInput" v-model="myText">
+        <ul>
+            <li v-for="(item,index) in dataList" :key="index">{{item}}</li>
+        </ul>
+    </div>
+    <script>
+        // vue中key值作用：跟踪每个节点的身份，从而重用和重新排序现有元素   最理想的key值为每项仅有且唯一的id
+
+        var app = new Vue({
+            el: "#app",
+            data: {
+                dataList: ["six", "one", "two", "aaa", "bbb", "ccc", "add"],
+                list: ["six", "one", "two", "aaa", "bbb", "ccc", "add"],
+                myText: ""
+            },
+            methods: {
+                handleInput() {
+                    console.log(this.myText);
+                    // 过滤
+                    // 可以用计算属性，目前还不删除的时候不会返回
+                    this.dataList = this.list.filter(item => {
+                        if (item.includes(this.myText)) {
+                            return item;
+                        }
+                    })
+                }
+            }
+        })
+
+
+        // filter  不影响原数组
+        var arr = [1, 2, 3, 4, 5, 6];
+        var newArr = arr.filter(item => {
+            if (item > 3) {
+                return item;
+            }
+        })
+
+        console.log(newArr);
+    </script>
+</body>
+
+</html>

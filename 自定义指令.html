@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自定义指令</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+
+<body>
+
+    <div id="app">
+        <div v-hello="'red'">11111</div>
+        <div v-hello="'yellow'">22222</div>
+    </div>
+
+    <script>
+        Vue.directive("hello",{
+            inserted(el,bind){
+                // 指令--生命周期
+                // el --原生dom节点,
+                // bind
+                el.style.background = bind.value;
+                console.log("此元素已经插入到父节点中",el,bind)
+            },
+            updata(el,bind){
+                el.style.background = bind.value;
+                console.log("更新时插入")
+            }
+        })
+
+        var app = new Vue({
+            el: "#app",
+            data: {
+                dataList: []
+            },
+        })
+    </script>
+</body>
+
+</html>

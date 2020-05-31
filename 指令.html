@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>指令</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .red {
+            background: red;
+        }
+
+        .yellow {
+            background: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <img style="width:100px;height:100px" v-bind:src="src" alt="">
+        <div :class="state?'red':'yellow'">切换class进行高亮显示</div>
+        <div v-if="isCreate">我是动态创建和删除  v-if</div>
+        <div v-show="isCreate">我是动态显示和隐藏  v-show</div>
+        <button v-on:click="handleClick">click</button>
+        <ul>
+            <li v-for="item in list">{{item}}</li>
+        </ul>
+    </div>
+    <script>
+
+        var app = new Vue({
+            el: "#app",
+            data: {
+                state: false,
+                isCreate:false,
+                src: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1589989144469&di=006027e9e43db244054c6596f8cfc1e1&imgtype=0&src=http%3A%2F%2Ft8.baidu.com%2Fit%2Fu%3D3571592872%2C3353494284%26fm%3D79%26app%3D86%26f%3DJPEG%3Fw%3D1200%26h%3D1290",
+                list:[1,2,3,4,5]
+            },
+            methods:{
+                handleClick(){
+                    this.state = !this.state;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

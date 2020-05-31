@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动态组件</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <component :is="who"></component>
+        <footer>
+            <ul>
+                <li @click="who = 'home'">home</li>
+                <li @click="who = 'list'">list</li>
+                <li @click="who = 'shopcar'">shopcar</li>
+            </ul>
+        </footer>
+    </div>
+    <script>
+        // 动态组件用component   会删除组件再重新创建   可以使用keep-alive保持状态
+        // vue实例   ，root Component
+        var app = new Vue({
+            el: "#app",
+            data: {
+                who:"home"
+            },
+            components:{
+                home:{
+                    template:`<div>home组件</div>`
+                },
+                list:{
+                    template:`<div>list组件</div>`
+                },
+                shopcar:{
+                    template:`<div>shopcar组件</div>`
+                }
+            },
+            methods: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bus事件总线</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <child1></child1>
+        <child2></child2>
+    </div>
+    <script>
+
+        var bus = new Vue();//中央事件总线
+
+        Vue.component("child1", {
+            template: `
+                <div>
+                    child1
+                    <button @click="handleclick">click</button>
+                </div>
+            `,
+            methods:{
+                handleclick(){
+                    bus.$emit("six","来自child1的问候")
+                }
+            }
+        })
+        Vue.component("child2", {
+            // 提前监听好six事件
+            template: `
+                <div>child2</div>
+            `,
+            mounted(){
+                console.log("mounted")
+                bus.$on("six",(data) => {
+                    console.log(data);
+                })
+            },
+            methods:{
+                
+            }
+        })
+
+        // vue实例   ，root Component
+        var app = new Vue({
+            el: "#app",
+            data: {
+
+            },
+            methods: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>
